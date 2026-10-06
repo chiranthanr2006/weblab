@@ -1,85 +1,131 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>BMSIT&M Timetable</title>
+    <title>Simple Calculator</title>
+
+    <style>
+        .calculator {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            border: 1px solid grey;
+            border-radius: 10px;
+            background-color: lightgrey;
+            text-align: center;
+            font-family: Arial;
+        }
+
+        .input {
+            width: 90%;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .operator {
+            width: 97%;
+            padding: 10px;
+            margin: 5px;
+        }
+
+        .calculate-btn {
+            padding: 10px 25px;
+            margin: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #result {
+            font-weight: bold;
+        }
+    </style>
 </head>
 
 <body>
 
-<table border="2">
-  <tr>
-    <th>DAY</th>
-    <th>I<br>8.30-9.25</th>
-    <th>II<br>9.25-10.20</th>
-    <th>10.20-10.40</th>
-    <th>III<br>10.40-11.35</th>
-    <th>IV<br>11.35-12.30</th>
-    <th>12.30-1.25</th>
-    <th>V<br>1.25-2.20</th>
-    <th>VI<br>2.20-3.15</th>
-    <th>VII<br>3.15-4.10</th>
-  </tr>
+    <div class="calculator">
 
-  <tr>
-    <td class="day">MONDAY</td>
-    <td>SE</td>
-    <td>TOC</td>
-    <td rowspan="6" class="break"><center>TEA<br>BREAK</center></td>
-    <td>CN</td>
-    <td>PE-1</td>
-    <td rowspan="6" class="break"><center>LUNCH<br>BREAK</center></td>
-    <td colspan="2">MINI PROJECT</td>
-    <td></td>
-  </tr>
+        <h2>Simple Calculator</h2>
 
-  <tr>
-    <td class="day">TUESDAY</td>
-    <td>PE-1</td>
-    <td>RMIPR</td>
-    <td>TOC</td>
-    <td>PLACEMENT</td>
-    <td colspan="2">WEB LAB</td>
-    <td></td>
-  </tr>
+        <input
+            type="number"
+            id="num1"
+            class="input"
+            placeholder="Enter first number"
+        >
 
-  <tr>
-    <td class="day">WEDNESDAY</td>
-    <td>CN</td>
-    <td>TOC</td>
-    <td colspan="2">CN LAB</td>
-    <td colspan="2">YOGA (NCMC)</td>
-    <td></td>
-  </tr>
+        <select id="operator" class="operator">
+            <option value="+">Addition (+)</option>
+            <option value="-">Subtraction (-)</option>
+            <option value="*">Multiplication (*)</option>
+            <option value="/">Division (/)</option>
+        </select>
 
-  <tr>
-    <td class="day">THURSDAY</td>
-    <td>RMIPR</td>
-    <td>CN</td>
-    <td>SE</td>
-    <td>EVS(PROJECTS)</td>
-    <td>PE-1</td>
-    <td></td>
-    <td></td>
-  </tr>
+        <input
+            type="number"
+            id="num2"
+            class="input"
+            placeholder="Enter second number"
+        >
 
-  <tr>
-    <td class="day">FRIDAY</td>
-    <td>TOC</td>
-    <td>SE</td>
-    <td>PLACEMENT</td>
-    <td>EVS(PROJECTS)</td>
-    <td colspan="2">PROCTORING</td>
-    <td></td>
-  </tr>
+        <button
+            onclick="calculate()"
+            class="calculate-btn"
+        >
+            Calculate
+        </button>
 
-  <tr>
-    <td class="day">SATURDAY</td>
-    <td colspan="2">IIC Activities</td>
-    <td colspan="2">Departmental Activities</td>
-    <td colspan="3"></td>
-  </tr>
-</table>
+        <p id="result"></p>
+
+    </div>
+
+    <script>
+        function calculate() {
+            let num1 = document.getElementById("num1").value;
+            let num2 = document.getElementById("num2").value;
+            let operator = document.getElementById("operator").value;
+            let result = document.getElementById("result");
+
+            if (num1 === "" || num2 === "") {
+                result.innerHTML = "Please enter both numbers.";
+                result.style.color = "red";
+                return;
+            }
+
+            num1 = Number(num1);
+            num2 = Number(num2);
+
+            let answer;
+
+            switch (operator) {
+                case "+":
+                    answer = num1 + num2;
+                    break;
+
+                case "-":
+                    answer = num1 - num2;
+                    break;
+
+                case "*":
+                    answer = num1 * num2;
+                    break;
+
+                case "/":
+                    if (num2 === 0) {
+                        result.innerHTML = "Error: Cannot divide by zero.";
+                        result.style.color = "red";
+                        return;
+                    }
+                    answer = num1 / num2;
+                    break;
+            }
+
+            result.innerHTML = "Result: " + answer;
+            result.style.color = "green";
+        }
+    </script>
 
 </body>
 </html>
