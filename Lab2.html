@@ -1,21 +1,48 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-<meta charset="UTF-8">
-<title>Images</title>
+  <title>Text Animation</title>
 </head>
-<style>
-  .vk{
-    width: 700px;
-    height: 600px;
-  }
-</style>
-
 <body>
-  <div>
-    <p>Virat kohli</p>
-    <br>
-    <img src="https://images.squarespace-cdn.com/content/v1/5d7fa27ac591f01062106a9f/d355ee04-655f-4f37-99bb-744d97a6bd1a/Virat+Kohli.jpg" class="vk">
-  </div>
+  <h1 id="animatedText"></h1>
+
+  <script>
+    var textElement = document.getElementById("animatedText");
+    var fontSize = 5;
+    var isGrowing = true;
+
+    textElement.innerText = "TEXT-GROWING";
+    textElement.style.color = "red";
+
+    var timerId = setInterval(changeSize, 100);
+
+    function changeSize()
+    {
+      if (isGrowing == true)
+      {
+        fontSize = fontSize + 1;
+
+        if (fontSize >= 50)
+        {
+          isGrowing = false;
+          textElement.innerText = "TEXTSHRINKING";
+          textElement.style.color = "blue";
+        }
+      }
+      else
+      {
+        fontSize = fontSize - 1;
+
+        if (fontSize <= 5)
+        {
+          isGrowing = true;
+          textElement.innerText = "TEXT-GROWING";
+          textElement.style.color = "red";
+        }
+      }
+
+      textElement.style.fontSize = fontSize + "px";
+    }
+  </script>
 </body>
 </html>
